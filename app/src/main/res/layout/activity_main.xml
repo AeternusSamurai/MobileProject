@@ -7,4 +7,64 @@
     style="@style/Base.TextAppearance.AppCompat">
 
 
+<Chronometer
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/chronometer"
+    android:textSize="50dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="start Button"
+    android:id="@+id/button"
+    android:layout_below="@+id/chronometer"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:onClick="startTimer"
+    />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Stop Button"
+    android:id="@+id/button2"
+    android:layout_alignTop="@+id/button"
+    android:layout_toRightOf="@+id/button"
+    android:layout_toEndOf="@+id/button"
+    android:onClick="stopTimer"
+    />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:inputType="number"
+    android:ems="10"
+    android:id="@+id/editText3"
+    android:layout_below="@+id/button"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="52dp"
+    android:text="00000"
+    android:textSize="50dp"
+    android:editable="false"
+    android:enabled="true"
+    android:layout_alignRight="@+id/button2"
+    android:layout_alignEnd="@+id/button2" />
+
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/editText4"
+    android:text="Steps"
+    android:layout_alignBottom="@+id/editText3"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true"
+    android:editable="false"
+    android:enabled="true"
+    android:layout_toRightOf="@+id/editText3"
+    android:layout_toEndOf="@+id/editText3" />
 </RelativeLayout>
