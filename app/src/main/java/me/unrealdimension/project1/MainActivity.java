@@ -9,10 +9,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Chronometer;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    private Chronometer mChronometer;
 
 
     @Override
@@ -68,6 +69,12 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    public void startTimer() {
+        mChronometer.start();
+    }
 
+    public void stopTimer() {
+        mChronometer.stop();
+    }
 
 }
