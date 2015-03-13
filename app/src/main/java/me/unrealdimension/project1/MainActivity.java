@@ -71,12 +71,16 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void startTimer(View v) {
+        // TODO use setBase method of the chronometer the restart it from the last time that it was started from
         mChronometer.start();
     }
 
     public void stopTimer(View v) {
+        //TODO Save the time that the chronometer was stopped at so that the timer can be started from the last time it was stopped at.
         mChronometer.stop();
 
     }
+
+    // TODO Either write a reset method with a button or implement a long press on the stop button that calls the reset method that will reset the base of the chronometer.
 
 }
