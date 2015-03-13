@@ -40,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mChronometer = (Chronometer)findViewById(R.id.chronometer);
     }
 
 
@@ -69,12 +70,13 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void startTimer() {
+    public void startTimer(View v) {
         mChronometer.start();
     }
 
-    public void stopTimer() {
+    public void stopTimer(View v) {
         mChronometer.stop();
+
     }
 
 }
