@@ -4,6 +4,7 @@ package me.unrealdimension.project1;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +15,9 @@ import android.widget.Chronometer;
 
 public class MainActivity extends ActionBarActivity {
     private Chronometer mChronometer;
-
+    long baseTime = SystemClock.elapsedRealtime();
+    long stopTime;
+    long elapsedTime;
 
     @Override
     public void onBackPressed() {
@@ -69,11 +72,14 @@ public class MainActivity extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    long timeWhenStopped = 0;
     public void startTimer(View v) {
         // TODO use setBase method of the chronometer the restart it from the last time that it was started from
+       // baseTime = SystemClock.elapsedRealtime() - stopTime;
+        mChronometer.setBase(baseTime);
         mChronometer.start();
     }
+
 
     public void stopTimer(View v) {
         //TODO Save the time that the chronometer was stopped at so that the timer can be started from the last time it was stopped at.
@@ -81,6 +87,11 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    // TODO Get pause to work right
+    public void pauseTimer(View v) {
+        baseTime = mChronometer.getBase();
+        mChronometer.stop();
+    }
     // TODO Either write a reset method with a button or implement a long press on the stop button that calls the reset method that will reset the base of the chronometer.
 
 }

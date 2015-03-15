@@ -67,4 +67,17 @@
     android:enabled="true"
     android:layout_toRightOf="@+id/editText3"
     android:layout_toEndOf="@+id/editText3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pause"
+        android:id="@+id/pauseButton"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignLeft="@+id/editText4"
+        android:layout_alignStart="@+id/editText4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="pauseTimer"
+        />
 </RelativeLayout>
