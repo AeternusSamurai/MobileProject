@@ -7,77 +7,118 @@
     style="@style/Base.TextAppearance.AppCompat">
 
 
-<Chronometer
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/chronometer"
-    android:textSize="50dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/timer_layout"
+        android:padding="8dp">
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="start Button"
-    android:id="@+id/button"
-    android:layout_below="@+id/chronometer"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:onClick="startTimer"
-    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop Watch"
+            android:id="@+id/timer_title"
+            android:textSize="35sp"
+            android:textColor="@android:color/black"
+            android:layout_alignLeft="@+id/chronometer"
+            android:layout_alignStart="@+id/chronometer"
+            android:layout_alignRight="@+id/chronometer"
+            android:layout_alignEnd="@+id/chronometer"
+            android:gravity="center_horizontal" />
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Stop Button"
-    android:id="@+id/button2"
-    android:layout_alignTop="@+id/button"
-    android:layout_toRightOf="@+id/button"
-    android:layout_toEndOf="@+id/button"
-    android:onClick="stopTimer"
-    />
+        <Chronometer
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/chronometer"
+            android:textSize="50sp"
+            android:layout_below="@+id/timer_title"
+            android:layout_alignLeft="@+id/start_button"
+            android:layout_alignStart="@+id/start_button"
+            android:layout_alignRight="@+id/reset_button"
+            android:layout_alignEnd="@+id/reset_button" />
 
-<EditText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:inputType="number"
-    android:ems="10"
-    android:id="@+id/editText3"
-    android:layout_below="@+id/button"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:layout_marginTop="52dp"
-    android:text="00000"
-    android:textSize="50dp"
-    android:editable="false"
-    android:enabled="true"
-    android:layout_alignRight="@+id/button2"
-    android:layout_alignEnd="@+id/button2" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pause"
+            android:id="@+id/pause_button"
+            android:onClick="pauseTimer"
+            android:layout_below="@+id/chronometer"
+            android:layout_centerInParent="true" />
 
-<EditText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/editText4"
-    android:text="Steps"
-    android:layout_alignBottom="@+id/editText3"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    android:editable="false"
-    android:enabled="true"
-    android:layout_toRightOf="@+id/editText3"
-    android:layout_toEndOf="@+id/editText3" />
-
-    <Button
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pause"
-        android:id="@+id/pauseButton"
-        android:layout_alignTop="@+id/button2"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4"
+        android:text="Start"
+        android:id="@+id/start_button"
+            android:onClick="startTimer"
+            android:textAlignment="center"
+            android:layout_alignBottom="@+id/pause_button"
+            android:layout_toLeftOf="@+id/pause_button" />
+
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:id="@+id/reset_button"
+        android:onClick="stopTimer"
+            android:layout_toRightOf="@+id/pause_button"
+            android:layout_toEndOf="@+id/pause_button"
+            android:layout_alignBottom="@+id/pause_button" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/timer_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout">
+
+        <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText3"
+            android:text="00000"
+        android:textSize="50sp"
+        android:editable="false"
+        android:enabled="true"
+            android:layout_below="@+id/timer_layout"
+            android:layout_weight="2"
+            android:textColor="@android:color/black" />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText4"
+        android:text="Steps"
+        android:layout_alignBottom="@+id/editText3"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_toRightOf="@+id/editText3"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="pauseTimer"
-        />
+            android:layout_gravity="bottom"
+            android:textSize="45sp"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Step Counter"
+        android:id="@+id/step_counter_title"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"
+        android:textSize="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/timer_layout" />
 </RelativeLayout>
