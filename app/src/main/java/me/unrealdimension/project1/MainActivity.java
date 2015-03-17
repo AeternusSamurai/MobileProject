@@ -93,7 +93,7 @@ public class MainActivity extends ActionBarActivity {
     // TODO Get pause to work right
     public void pauseTimer(View v) {
         mChronometer.stop();
-        baseTime = mChronometer.getBase();
+        stopTime = Long.parseLong(mChronometer.getText().toString());
     }
     // TODO Either write a reset method with a button or implement a long press on the stop button that calls the reset method that will reset the base of the chronometer.
 
