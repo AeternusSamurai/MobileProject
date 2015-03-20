@@ -16,7 +16,7 @@ import android.widget.Chronometer;
 public class MainActivity extends ActionBarActivity {
     private Chronometer mChronometer;
     long baseTime = 0; // The initial base time for when the timer is first started.
-    long stopTime;
+    long stopTime = 0;
     long elapsedTime;
 
     @Override
@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
     long timeWhenStopped = 0;
     public void startTimer(View v) {
         // TODO use setBase method of the chronometer the restart it from the last time that it was started from
-       // baseTime = SystemClock.elapsedRealtime() - stopTime;
+        baseTime = SystemClock.elapsedRealtime() - stopTime;
         mChronometer.setBase(baseTime);
         mChronometer.start();
     }
@@ -84,14 +84,16 @@ public class MainActivity extends ActionBarActivity {
     public void stopTimer(View v) {
         //TODO Save the time that the chronometer was stopped at so that the timer can be started from the last time it was stopped at.
         mChronometer.stop();
+        mChronometer.setText("0");
         baseTime = 0;
+        stopTime = 0;
 
     }
 
     // TODO Get pause to work right
     public void pauseTimer(View v) {
         mChronometer.stop();
-        baseTime = mChronometer.getBase();
+        stopTime = Long.parseLong(mChronometer.getText().toString());
     }
     // TODO Either write a reset method with a button or implement a long press on the stop button that calls the reset method that will reset the base of the chronometer.
 
