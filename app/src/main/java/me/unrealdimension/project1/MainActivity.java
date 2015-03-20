@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
         mChronometer.setText("0");
         baseTime = 0;
         stopTime = 0;
-
+        //this is a test
     }
 
     // TODO Get pause to work right
