@@ -81,7 +81,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void stopTimer(View v) {
+    public void resetTimer(View v) {
         //TODO Save the time that the chronometer was stopped at so that the timer can be started from the last time it was stopped at.
         mChronometer.stop();
         mChronometer.setText("0");

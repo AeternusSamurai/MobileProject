@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:text="Reset"
         android:id="@+id/reset_button"
-        android:onClick="stopTimer"
+        android:onClick="resetTimer"
             android:layout_toRightOf="@+id/pause_button"
             android:layout_toEndOf="@+id/pause_button"
             android:layout_alignBottom="@+id/pause_button" />
