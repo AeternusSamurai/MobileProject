@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mChronometer = (Chronometer)findViewById(R.id.chronometer);
+        //mChronometer = (Chronometer)findViewById(R.id.chronometer);
     }
 
 
@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
         mChronometer.stop();
         baseTime = 0;
         stopTime = 0;
-        mChronometer.setBase(SystemClock.elapsedRealtime());
+        mChronometer.setBase(0);
     }
 
     public void stopTimer(View v) {
