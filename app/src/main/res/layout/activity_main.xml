@@ -93,7 +93,8 @@
         android:enabled="true"
             android:layout_below="@+id/timer_layout"
             android:layout_weight="2"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            />
 
         <TextView
         android:layout_width="wrap_content"
@@ -108,7 +109,8 @@
         android:layout_alignParentEnd="true"
             android:layout_gravity="bottom"
             android:textSize="45sp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            />
     </LinearLayout>
 
     <TextView
@@ -120,7 +122,8 @@
         android:textColor="@android:color/black"
         android:textSize="40dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/timer_layout" />
+        android:layout_below="@+id/timer_layout"
+        />
 
     <TextView
         android:layout_width="wrap_content"
