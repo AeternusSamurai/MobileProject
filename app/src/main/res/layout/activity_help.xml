@@ -17,7 +17,10 @@
         android:editable="false"
         android:enabled="true"
         android:text="‘CEG 4410: Golf Buddy’ Subsystem Features include:"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="#ff000000"
+        android:textStyle="bold"
+        />
 
     <EditText
         android:layout_width="match_parent"
