@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
      *  multiple accounts on the device and needing to specify which account to use, etc.
 
 */
-    
+
 
     private void buildFitnessClient() {
         // Create the Google API Client
