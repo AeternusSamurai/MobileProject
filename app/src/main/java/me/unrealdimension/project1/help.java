@@ -41,4 +41,9 @@ public class help extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public FragmentManager getSupportFragmentManager() {
+        return null;
+    }
 }

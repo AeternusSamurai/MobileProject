@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -51,13 +52,30 @@ public class MainActivity extends ActionBarActivity
     int mInitialNumberOfSteps = 0;
     private TextView mStepsTextView;
     private boolean mFirstCount = true;
-
+    private TextView countDown;
     // Create Builder View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mStepsTextView = (TextView) findViewById(R.id.step_counter);
+
+        countDown = (TextView) findViewById(R.id.coutdDownTimer);
+        //  new RefreshTask().execute();
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                countDown.setText("Warm Up Arms for: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                countDown.setText("Good job!");
+            }
+
+        }.start();
+
+
+
     }
 
     @Override
