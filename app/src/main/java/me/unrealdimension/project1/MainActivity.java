@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.net.wifi.WifiConfiguration;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,6 +19,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Chronometer;
 import android.os.AsyncTask;
+import android.widget.TextView;
+import java.util.Timer;
+import java.util.TimerTask;
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Handler.Callback;
+import android.widget.Button;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.Scopes;
@@ -30,8 +42,16 @@ import com.google.android.gms.fitness.data.Value;
 import com.google.android.gms.fitness.request.SensorRequest;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.DataSource;
-
+import java.util.Timer;
+import java.util.TimerTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.TextView;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
+
 
 import static android.os.AsyncTask.Status;
 /*
@@ -45,21 +65,32 @@ import com.google.api.services.tasks.model.*;
 
 
 public class MainActivity extends ActionBarActivity {
+
     private Chronometer mChronometer;
     long stopTime = 0;
-    long baseTime = SystemClock.elapsedRealtime()-stopTime; // The initial base time for when the timer is first started.
-    long elapsedTime;
+    long baseTime = SystemClock.elapsedRealtime() - stopTime; // The initial base time for when the timer is first started.
+
     private static final int REQUEST_OAUTH = 1;
 
     /**
-     *  Track whether an authorization activity is stacking over the current activity, i.e. when
-     *  a known auth error is being resolved, such as showing the account chooser or presenting a
-     *  consent dialog. This avoids common duplications as might happen on screen rotations, etc.
+     * Track whether an authorization activity is stacking over the current activity, i.e. when
+     * a known auth error is being resolved, such as showing the account chooser or presenting a
+     * consent dialog. This avoids common duplications as might happen on screen rotations, etc.
      */
     private static final String AUTH_PENDING = "auth_state_pending";
     private boolean authInProgress = false;
-
     GoogleApiClient mClient = null;
+
+
+    TextView text, text2, text3;
+
+    boolean someCondition=true;
+    //this  posts a message to the main thread from our timertask
+    //and updates the textfield
+
+
+
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -84,26 +115,38 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
             authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
         }
 
-      /*  mClient = new GoogleApiClient.Builder(this)
-                .addApi(Fitness.API)
-                    .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ))
-                    .addScope(new Scope(Scopes.FITNESS_ACTIVITY_READ))
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .build();
-       */
+
+        text2 = (TextView) findViewById(R.id.text2);
+        text3 = (TextView) findViewById(R.id.text3);
+      //  new RefreshTask().execute();
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                text2.setText("Warm Up Arms for: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                text2.setText("Good job!");
+            }
+
+        }.start();
+
+
         buildFitnessClient();
 
 
-        setContentView(R.layout.activity_main);
+
         //mChronometer = (Chronometer)findViewById(R.id.chronometer);
 
     }
+
+
+
 /*    @Override
     public void onConnected(Bundle bundle){
         final String TAG = MainActivity.class.getSimpleName();
@@ -285,4 +328,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+
 }
+

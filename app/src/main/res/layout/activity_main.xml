@@ -102,4 +102,70 @@
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer"
+        android:id="@+id/text2"
+        android:textColor="@android:color/black"
+        android:textSize="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="95dp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/textView5"
+        android:text="00000"
+        android:textSize="50sp"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_weight="2"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/text2"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/textView6"
+        android:text="00000"
+        android:textSize="50sp"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_weight="2"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/text2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/textView7"
+        android:text="00000"
+        android:textSize="50sp"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_weight="2"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/text2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press Me!"
+        android:id="@+id/button"
+        android:layout_below="@+id/textView5" />
+
 </RelativeLayout>
