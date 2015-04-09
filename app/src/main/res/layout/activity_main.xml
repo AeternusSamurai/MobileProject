@@ -109,9 +109,9 @@
         android:id="@+id/text2"
         android:textColor="@android:color/black"
         android:textSize="40dp"
+        android:layout_marginTop="133dp"
         android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="95dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="0dp"
