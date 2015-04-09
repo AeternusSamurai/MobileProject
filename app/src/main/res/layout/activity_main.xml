@@ -105,4 +105,18 @@
         android:layout_centerHorizontal="true"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/countDownTimer"
+        android:text="Test"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_gravity="bottom"
+        android:textSize="45sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
