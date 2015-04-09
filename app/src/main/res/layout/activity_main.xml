@@ -8,76 +8,11 @@
     android:background="@drawable/grass_background">
 
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/timer_layout"
-        android:padding="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stop Watch"
-            android:id="@+id/timer_title"
-            android:textSize="35sp"
-            android:textColor="@android:color/black"
-            android:layout_alignLeft="@+id/chronometer"
-            android:layout_alignStart="@+id/chronometer"
-            android:layout_alignRight="@+id/chronometer"
-            android:layout_alignEnd="@+id/chronometer"
-            android:gravity="center_horizontal" />
-
-        <Chronometer
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/chronometer"
-            android:textSize="50sp"
-            android:layout_below="@+id/timer_title"
-            android:layout_alignLeft="@+id/start_button"
-            android:layout_alignStart="@+id/start_button"
-            android:layout_alignRight="@+id/reset_button"
-            android:layout_alignEnd="@+id/reset_button" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pause"
-            android:id="@+id/pause_button"
-            android:onClick="pauseTimer"
-            android:layout_below="@+id/chronometer"
-            android:layout_centerInParent="true" />
-
-        <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:id="@+id/start_button"
-            android:onClick="startTimer"
-            android:textAlignment="center"
-            android:layout_alignBottom="@+id/pause_button"
-            android:layout_toLeftOf="@+id/pause_button" />
-
-        <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset"
-        android:id="@+id/reset_button"
-        android:onClick="resetTimer"
-            android:layout_toRightOf="@+id/pause_button"
-            android:layout_toEndOf="@+id/pause_button"
-            android:layout_alignBottom="@+id/pause_button" />
-
-    </RelativeLayout>
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="57dp"
-        android:layout_below="@+id/timer_layout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/linearLayout">
@@ -87,29 +22,31 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/step_counter"
             android:text="00000"
         android:textSize="50sp"
         android:editable="false"
         android:enabled="true"
             android:layout_below="@+id/timer_layout"
             android:layout_weight="2"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            />
 
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editText4"
         android:text="Steps"
-        android:layout_alignBottom="@+id/editText3"
+        android:layout_alignBottom="@+id/step_counter"
         android:editable="false"
         android:enabled="true"
-        android:layout_toRightOf="@+id/editText3"
+        android:layout_toRightOf="@+id/step_counter"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
             android:layout_gravity="bottom"
             android:textSize="45sp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            />
     </LinearLayout>
 
     <TextView
@@ -120,6 +57,48 @@
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/black"
         android:textSize="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/timer_layout" />
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:text="Calories"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_gravity="bottom"
+        android:textSize="45sp"
+        android:textColor="@android:color/black"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/textView2"
+        android:text="00000"
+        android:textSize="50sp"
+        android:editable="false"
+        android:enabled="true"
+        android:layout_weight="2"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/textView3"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calorie Counter"
+        android:id="@+id/textView3"
+        android:textColor="@android:color/black"
+        android:textSize="40dp"
+        android:password="false"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
