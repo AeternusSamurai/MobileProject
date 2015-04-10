@@ -4,8 +4,6 @@ package me.unrealdimension.project1;
 /*
 Importing Android Class And Google FIT API
  */
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +14,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,12 +38,15 @@ import com.google.android.gms.fitness.request.DataSourcesRequest;
 import com.google.android.gms.fitness.request.OnDataPointListener;
 import com.google.android.gms.fitness.request.SensorRequest;
 import com.google.android.gms.fitness.result.DataSourcesResult;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class MainActivity extends ActionBarActivity
-        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-
+public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "FitActivity";
     //[START Auth_Variable_References]
     private static final int REQUEST_OAUTH = 1;
@@ -53,16 +57,27 @@ public class MainActivity extends ActionBarActivity
     private TextView mStepsTextView;
     private boolean mFirstCount = true;
     private TextView countDown;
+    private TextView distanceInMiles;
+    private TextView Bmr;
+    double distInMiles;
+    private Button submit;
+    private EditText inputField;
+    private double BMRvalue;
     // Create Builder View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        submit = (Button)findViewById(R.id.button_w);
+
+       inputField = (EditText) findViewById(R.id.BigTextField);
         mStepsTextView = (TextView) findViewById(R.id.step_counter);
 
         countDown = (TextView) findViewById(R.id.countDownTimer);
+        distanceInMiles = (TextView)findViewById(R.id.textView5);
+        Bmr = (TextView) findViewById(R.id.textView2);
         //  new RefreshTask().execute();
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(20000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 countDown.setText("Warm Up Arms for: " + millisUntilFinished / 1000);
@@ -73,6 +88,28 @@ public class MainActivity extends ActionBarActivity
             }
 
         }.start();
+
+        //get values for weight and gender
+        submit.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                      String information = inputField.getText().toString();
+                      List<String> infoStrings = Arrays.asList(information.split(","));
+                      if(infoStrings.get(2).equalsIgnoreCase("MALE")){
+                          BMRvalue = 10 * Double.valueOf(infoStrings.get(0))  + 6.25 * Double.valueOf(infoStrings.get(1)) - 5 * Double.valueOf(infoStrings.get(3)) +5;
+                        }
+                        else{
+                          BMRvalue = 10 * Double.valueOf(infoStrings.get(0))  + 6.25 * Double.valueOf(infoStrings.get(1)) - 5 * Double.valueOf(infoStrings.get(3)) - 161;
+                        }
+                        Bmr.setText(String.valueOf(BMRvalue));
+                    }
+                });
+
+
+
+        this.onStart();
     }
 
     @Override
@@ -141,13 +178,13 @@ public class MainActivity extends ActionBarActivity
                 .build();
 
         // Connect the Google API client
-        mClient.connect();
+        mClient.connect();//google call
     }
 
     // Manage OAuth authentication
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-
+        Log.e("CONNECTION", "FAILED");
         // Error while connecting. Try to resolve using the pending intent returned.
         if (result.getErrorCode() == ConnectionResult.SIGN_IN_REQUIRED ||
                 result.getErrorCode() == FitnessStatusCodes.NEEDS_OAUTH_PERMISSIONS) {
@@ -199,8 +236,9 @@ public class MainActivity extends ActionBarActivity
         OnDataPointListener listener = new OnDataPointListener() {
             @Override
             public void onDataPoint(DataPoint dataPoint) {
-
+                Log.d("TEST","DATAPOINT");
                 for (Field field : dataPoint.getDataType().getFields()) {
+                    Log.d("FIELD", field.getName()  + ":" + field.toString());
                     Value val = dataPoint.getValue(field);
                     updateTextViewWithStepCounter(val.asInt());
                 }
@@ -208,34 +246,34 @@ public class MainActivity extends ActionBarActivity
         };
 
         //Specify what data sources to return
-        DataSourcesRequest req = new DataSourcesRequest.Builder()
+        /*DataSourcesRequest req = new DataSourcesRequest.Builder()
                 .setDataSourceTypes(DataSource.TYPE_DERIVED)
                 .setDataTypes(DataType.TYPE_STEP_COUNT_DELTA)
                 .build();
-
+*/
         //  Invoke the Sensors API with:
         // - The Google API client object
         // - The data sources request object
-        PendingResult<DataSourcesResult> pendingResult =
-                Fitness.SensorsApi.findDataSources(mClient, req);
-
+        //PendingResult<DataSourcesResult> pendingResult =
+        //        Fitness.SensorsApi.findDataSources(mClient, req);
+        //System.out.print("Pending Result: " + pendingResult);
         //  Build a sensor registration request object
         SensorRequest sensorRequest = new SensorRequest.Builder()
                 .setDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE)
                 .setSamplingRate(1, TimeUnit.SECONDS)
                 .build();
-
+        //new SensorRequest.Builder()
+       // .setDataType(DataType.TYPE_STEP_COUNT_DELTA)
+       //         .build()
         //  Invoke the Sensors API with:
         // - The Google API client object
         // - The sensor registration request object
         // - The listener object
         PendingResult<Status> regResult =
                 Fitness.SensorsApi.add(mClient,
-                        new SensorRequest.Builder()
-                                .setDataType(DataType.TYPE_STEP_COUNT_DELTA)
-                                .build(),
+                        sensorRequest,
                         listener);
-
+        Log.d("TEST","Reg Result: " +regResult);
 
         // 4. Check the result asynchronously
         regResult.setResultCallback(new ResultCallback<Status>()
@@ -262,10 +300,12 @@ public class MainActivity extends ActionBarActivity
 
                 if(mFirstCount && (numberOfSteps != 0)) {
                     mInitialNumberOfSteps = numberOfSteps;
+                    distInMiles = (mInitialNumberOfSteps / 5280.0);
                     mFirstCount = false;
                 }
                 if(mStepsTextView != null){
                     mStepsTextView.setText(String.valueOf(numberOfSteps - mInitialNumberOfSteps));
+                    distanceInMiles.setText(String.format("%.5f",((numberOfSteps - mInitialNumberOfSteps)/ 5280.0)));
                 }
             }
         });
@@ -277,16 +317,20 @@ public class MainActivity extends ActionBarActivity
         super.onStart();
         mFirstCount = true;
         mInitialNumberOfSteps = 0;
+        distInMiles = 0;
         if (mClient == null || !mClient.isConnected()) {
-            connectFitness();
+            connectFitness();//then connect
+
         }
     }
     //Stop
     @Override
     protected void onStop() {
         super.onStop();
-        if(mClient.isConnected() || mClient.isConnecting()) mClient.disconnect();
+        if(mClient.isConnected() || mClient.isConnecting())
+            mClient.disconnect();
         mInitialNumberOfSteps = 0;
+        distInMiles = 0;
         mFirstCount = true;
     }
 
